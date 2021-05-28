@@ -7,6 +7,9 @@
         <Menu class="javax.swing.JMenu" name="JMenuItenCS">
           <Properties>
             <Property name="text" type="java.lang.String" value="Archivo"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="JMICS">
@@ -22,48 +25,57 @@
         <Menu class="javax.swing.JMenu" name="JMenuCatalogos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cat&#xe1;logos"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="JMenuItemFacultades">
+            <MenuItem class="javax.swing.JMenuItem" name="Amadellaves">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Facultades"/>
+                <Property name="text" type="java.lang.String" value="Ama de Llaves"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItemFacultadesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AmadellavesActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Habitaciones">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Habitaciones"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Servicios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Servicios"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Formasdepago">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Formas de Pago"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Huespedes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Huespedes"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Pisos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pisos"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="JMenuProcesos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Procesos"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="JMenuAsignaciones">
+            <MenuItem class="javax.swing.JMenuItem" name="Facturarhabitacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Asignaciones"/>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="JMenuItemAsigCA">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cursos a Alumnos"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="JMenuItemAsigCC">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Cursos a Catedr&#xe1;ticos"/>
-                  </Properties>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="JMenuItemIN">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ingreso Notas"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="JMenuItemRegAct">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Registo Actas"/>
+                <Property name="text" type="java.lang.String" value="Facturar Habitaci&#xf3;n"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -71,16 +83,25 @@
         <Menu class="javax.swing.JMenu" name="JMenuInformes">
           <Properties>
             <Property name="text" type="java.lang.String" value="Informes"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="JMenuHerramientas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Herramientas"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="JMenuAyuda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ayuda"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
           </Properties>
         </Menu>
       </SubComponents>

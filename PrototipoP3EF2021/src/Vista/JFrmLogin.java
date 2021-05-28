@@ -45,7 +45,7 @@ public class JFrmLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login: Sistema Universitario");
+        setTitle("Login: Sistema Hotel Quetzal");
         setResizable(false);
 
         JLblUsuario.setText("Usuario");
