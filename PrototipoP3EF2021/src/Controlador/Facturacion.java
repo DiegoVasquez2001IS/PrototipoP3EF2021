@@ -7,7 +7,7 @@ package Controlador;
 
 /**
  *
- * @author Jeff
+ * @author Diego
  */
 public class Facturacion {
 

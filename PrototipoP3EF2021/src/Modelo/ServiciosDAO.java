@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class ServiciosDAO {
     private static final String SQL_INSERT = "insert into tbl_servicios values(?,?,?,?,?,?)";

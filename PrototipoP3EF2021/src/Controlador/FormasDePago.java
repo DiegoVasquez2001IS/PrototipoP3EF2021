@@ -7,7 +7,7 @@ package Controlador;
 
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class FormasDePago {
     private String id, nombre, descripcion, estado;

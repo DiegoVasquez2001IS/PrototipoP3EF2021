@@ -7,7 +7,7 @@ package Controlador;
 
 /**
  *
- * @author gegmo
+ * @author Diego
  */
 public class Habitaciones {
     private int Id_Habitaciones;

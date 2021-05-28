@@ -2,7 +2,7 @@ package Modelo;
 
 /**
  *
- * @author Diego Vásquez
+ * @author Diego
  */
 import java.sql.*;
 

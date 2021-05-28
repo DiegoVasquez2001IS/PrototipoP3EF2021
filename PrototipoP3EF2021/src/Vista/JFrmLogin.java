@@ -14,7 +14,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Diego Vásquez
+ * @author Diego
  */
 public class JFrmLogin extends javax.swing.JFrame {
 

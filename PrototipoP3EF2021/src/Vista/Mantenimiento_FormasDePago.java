@@ -29,7 +29,7 @@ import net.sf.jasperreports.view.JasperViewer;*/
 
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
 

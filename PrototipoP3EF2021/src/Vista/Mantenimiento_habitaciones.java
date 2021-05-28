@@ -32,7 +32,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;*/
 /**
  *
- * @author Jeff
+ * @author Diego
  */
 public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
 

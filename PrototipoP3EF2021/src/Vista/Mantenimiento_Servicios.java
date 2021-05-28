@@ -28,7 +28,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;*/
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
 

@@ -124,7 +124,7 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="btnAsignarUno" max="32767" attributes="0"/>
-                                  <Component id="btnAsignarTodos" pref="57" max="32767" attributes="0"/>
+                                  <Component id="btnAsignarTodos" max="32767" attributes="0"/>
                                   <Component id="jLabel11" alignment="0" max="32767" attributes="0"/>
                                   <Component id="btnQuitarUno" max="32767" attributes="0"/>
                                   <Component id="btnQuitarTodos" max="32767" attributes="0"/>

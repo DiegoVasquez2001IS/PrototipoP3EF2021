@@ -27,7 +27,7 @@ import net.sf.jasperreports.view.JasperViewer;*/
 
 /**
  *
- * @author Jeff
+ * @author Diego
  */
 public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
 

@@ -30,7 +30,7 @@ import net.sf.jasperreports.view.JasperViewer;*/
 
 /**
  *
- * @author Jeff
+ * @author Diego
  */
 public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
 

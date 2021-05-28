@@ -7,7 +7,7 @@ package Controlador;
 
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class Servicios {
     private String id, nombre, descripcion, tipo, estado, precio;

@@ -7,7 +7,7 @@ package Controlador;
 
 /**
  *
- * @author leelu
+ * @author Diego
  */
 public class Huespedes {
     private String codigo, nombre, apellido, nacionalidad, direccion, frecuencia, telefono, nit;

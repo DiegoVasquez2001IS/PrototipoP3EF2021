@@ -9,7 +9,7 @@ package Controlador;
 
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class Reservacion {
     private String id_reservacion, dpi, f_reserva, desde, hasta, id_habitacion, precio, estado, cantidadpersonas;

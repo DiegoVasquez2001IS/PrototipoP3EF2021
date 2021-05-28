@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class ReservacionDAO {
     public static String id, entrada, salida;
