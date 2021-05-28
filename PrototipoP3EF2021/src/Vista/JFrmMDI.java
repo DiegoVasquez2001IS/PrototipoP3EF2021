@@ -135,6 +135,11 @@ public class JFrmMDI extends javax.swing.JFrame {
         JMenuProcesos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         Facturarhabitacion.setText("Facturar Habitación");
+        Facturarhabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FacturarhabitacionActionPerformed(evt);
+            }
+        });
         JMenuProcesos.add(Facturarhabitacion);
 
         JMenuBarMDI.add(JMenuProcesos);
@@ -216,6 +221,12 @@ public class JFrmMDI extends javax.swing.JFrame {
         frmMantPisos.setVisible(true);
         JDPMDIContainer.add(frmMantPisos);
     }//GEN-LAST:event_PisosActionPerformed
+
+    private void FacturarhabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturarhabitacionActionPerformed
+        FacturacionDeHabitacion frmProceso = new FacturacionDeHabitacion();
+        frmProceso.setVisible(true);
+        JDPMDIContainer.add(frmProceso);
+    }//GEN-LAST:event_FacturarhabitacionActionPerformed
 
     /**
      * @param args the command line arguments
