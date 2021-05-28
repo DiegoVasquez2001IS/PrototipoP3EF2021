@@ -5,14 +5,14 @@
  */
 package Vista;
 
-import Hoteleria.datos.ConexionHoteleria;
+import Modelo.Conexion;
 import java.io.File;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Hoteleria.datos.HabitacionesDAO;
-import Hoteleria.dominio.Habitaciones;
+import Modelo.HabitacionesDAO;
+import Controlador.Habitaciones;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.text.ParseException;
@@ -24,16 +24,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
-import net.sf.jasperreports.engine.JasperCompileManager;
+
+/*import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
-import seguridad.datos.BitacoraDao;
-import seguridad.dominio.Bitacora;
-import seguridad.vista.Aplicacion_Perfil;
-import seguridad.vista.Login;
-
+import net.sf.jasperreports.view.JasperViewer;*/
 /**
  *
  * @author Jeff
@@ -84,6 +80,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
 
         }
     }
+
     public void limpiar() {
         txtId.setText("");
         txtDescripcion.setText("");
@@ -92,10 +89,10 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         txtPrecio.setText("");
         cbxTipo.setSelectedIndex(0);
         txtBuscar.setText("");
-        
+
     }
 
-    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario) {
+    /*private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario) {
         BitacoraDao BitacoraDAO = new BitacoraDao();
         Bitacora AInsertar = new Bitacora();
         boolean estado = false;
@@ -125,8 +122,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -499,7 +495,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 habitaciones.setEstado_Habitacion(0);
             }
             habitacionesDAO.insert(habitaciones);
-            GuardarEnBitacora("Insertar", codigoAplicacion, Login.usuarioSesion);
+
             JOptionPane.showMessageDialog(null, "Habitacion ingresada correctamente");
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
@@ -540,7 +536,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 habitaciones_Modificar.setEstado_Habitacion(0);
             }
             habitacionesDAO.update(habitaciones_Modificar);
-            GuardarEnBitacora("Modificacion", codigoAplicacion, Login.usuarioSesion);
+
             JOptionPane.showMessageDialog(null, "Habitacion Modificada correctamente");
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
@@ -553,23 +549,22 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         Habitaciones habitaciones_Buscar = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
         if (txtBuscar.getText().length() != 0) {
-        habitaciones_Buscar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
-        habitaciones_Buscar = habitacionesDAO.query(habitaciones_Buscar);
-        
-            
-        txtId.setText(String.valueOf(habitaciones_Buscar.getId_Habitaciones()));
-        txtDescripcion.setText(String.valueOf(habitaciones_Buscar.getDescripcion()));
-        txt_max.setText(habitaciones_Buscar.getMax_personas());
-        txtPrecio.setText(String.valueOf(habitaciones_Buscar.getPrecio()));
-        cbxPiso.setSelectedItem(habitaciones_Buscar.getPiso());
-        cbxTipo.setSelectedItem(String.valueOf(habitaciones_Buscar.getTipo_Habitacion()));
-        if (habitaciones_Buscar.getEstado_Habitacion() == 1) {
-            jradioDisponible.setSelected(true);
-        }
-        if (habitaciones_Buscar.getEstado_Habitacion() == 0) {
-            jradioOcupado.setSelected(true);
-        }
-        }else  {
+            habitaciones_Buscar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
+            habitaciones_Buscar = habitacionesDAO.query(habitaciones_Buscar);
+
+            txtId.setText(String.valueOf(habitaciones_Buscar.getId_Habitaciones()));
+            txtDescripcion.setText(String.valueOf(habitaciones_Buscar.getDescripcion()));
+            txt_max.setText(habitaciones_Buscar.getMax_personas());
+            txtPrecio.setText(String.valueOf(habitaciones_Buscar.getPrecio()));
+            cbxPiso.setSelectedItem(habitaciones_Buscar.getPiso());
+            cbxTipo.setSelectedItem(String.valueOf(habitaciones_Buscar.getTipo_Habitacion()));
+            if (habitaciones_Buscar.getEstado_Habitacion() == 1) {
+                jradioDisponible.setSelected(true);
+            }
+            if (habitaciones_Buscar.getEstado_Habitacion() == 0) {
+                jradioOcupado.setSelected(true);
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "campo de busqueda esta vacio");
         }
 
@@ -587,7 +582,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdKeyTyped
 
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
-try {
+        try {
             if ((new File("src\\main\\java\\Hoteleria\\ayuda\\Ayuda Mantenimiento Habitaciones.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
@@ -632,32 +627,32 @@ try {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Habitaciones habitaciones_Eliminar = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
-        
-        if (txtBuscar.getText().length() !=0) {
-            
-        habitaciones_Eliminar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
-        habitacionesDAO.delete(habitaciones_Eliminar);
-        GuardarEnBitacora("Eliminacion", codigoAplicacion, Login.usuarioSesion);
-        JOptionPane.showMessageDialog(null, "Registro Eliminado.");
-        }else  {
+
+        if (txtBuscar.getText().length() != 0) {
+
+            habitaciones_Eliminar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
+            habitacionesDAO.delete(habitaciones_Eliminar);
+
+            JOptionPane.showMessageDialog(null, "Registro Eliminado.");
+        } else {
             JOptionPane.showMessageDialog(null, "No puede eliminar si el campo esta vacio");
         }
-        
+
         tabla();
         limpiar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-    MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-    MDIHoteleria.logo.setVisible(true); 
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
-private Connection connection = null;
+    private Connection connection = null;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        Map p = new HashMap();
+        /* Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
@@ -672,7 +667,7 @@ private Connection connection = null;
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

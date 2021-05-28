@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Hoteleria.dominio.Habitaciones;
+import Controlador.Habitaciones;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class HabitacionesDAO {
 
         try {
 
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY2);
             //stmt.setInt(1, aplicacion.getId_ModuloCbx());
@@ -54,9 +54,9 @@ public class HabitacionesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
     }
@@ -65,7 +65,7 @@ public class HabitacionesDAO {
         PreparedStatement stmt = null;
         int rows = 0;
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, mantenimiento_habitaciones.getId_Habitaciones());
             stmt.setString(2, mantenimiento_habitaciones.getDescripcion());
@@ -82,8 +82,8 @@ public class HabitacionesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;
@@ -95,7 +95,7 @@ public class HabitacionesDAO {
         int rows = 0;
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, mantenimiento_habitaciones.getDescripcion());
@@ -112,8 +112,8 @@ public class HabitacionesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;
@@ -129,7 +129,7 @@ public class HabitacionesDAO {
 
         try {
 
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setInt(1, habitaciones.getId_Habitaciones());
@@ -157,9 +157,9 @@ public class HabitacionesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
 
         }
         return (habitaciones);
@@ -173,7 +173,7 @@ public class HabitacionesDAO {
         List<Habitaciones> habitacione = new ArrayList<Habitaciones>();
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -200,9 +200,9 @@ public class HabitacionesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return habitacione;
     }
@@ -214,7 +214,7 @@ public class HabitacionesDAO {
         int rows = 0;
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, habitaciones.getId_Habitaciones());
@@ -223,8 +223,8 @@ public class HabitacionesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;

@@ -5,84 +5,52 @@
  */
 package Vista;
 
-import Hoteleria.datos.ConexionHoteleria;
-import Hoteleria.datos.HuespedesDAO;
-import Hoteleria.dominio.Huespedes;
+import Modelo.Conexion;
+import Modelo.HuespedesDAO;
+import Controlador.Huespedes;
 import java.io.File;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import seguridad.vista.GenerarPermisos;
-import seguridad.vista.Login;
-import Hoteleria.datos.GuardarBitacoraDAO;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
-import net.sf.jasperreports.engine.JasperCompileManager;
+
+/*import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.view.JasperViewer;*/
 /**
  *
  * @author leelu
  */
 public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
+
     DefaultTableModel modelo1;
-    DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
-    String codigoAplicacion="2004";
+    DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    String codigoAplicacion = "2004";
+
     /**
      * Creates new form Mantenimiento_Huespedes
      */
-    void habilitarAcciones() {
-
-        var codigoAplicacion = 2004;
-        var usuario = Login.usuarioHoteleria;
-
-        BtnIng.setEnabled(false);
-        BtnMod.setEnabled(false);
-        BtnElim.setEnabled(false);
-        BtnBus.setEnabled(false);
-
-        GenerarPermisos permisos = new GenerarPermisos();
-
-        String[] permisosApp = new String[5];
-
-        for (int i = 0; i < 5; i++) {
-            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
-        }
-
-        if (permisosApp[0].equals("1")) {
-            System.out.println(permisosApp[0]);
-            BtnIng.setEnabled(true);
-        }
-        if (permisosApp[1].equals("1")) {
-            BtnBus.setEnabled(true);
-        }
-        if (permisosApp[2].equals("1")) {
-            BtnMod.setEnabled(true);
-        }
-        if (permisosApp[3].equals("1")) {
-            BtnElim.setEnabled(true);
-        }
-    }
     public Mantenimiento_Huespedes() {
         initComponents();
-        habilitarAcciones();
         actualizartabla();
     }
-    
-    private static boolean isNumeric(String cadena){
+
+    private static boolean isNumeric(String cadena) {
         try {
-                Integer.parseInt(cadena);
-                return true;
-        } catch (NumberFormatException nfe){
-                return false;
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
         }
     }
-    private void limpiar(){
+
+    private void limpiar() {
         txt_codigo.setText("");
         txt_nombre.setText("");
         txt_apellido.setText("");
@@ -92,11 +60,12 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         txt_telefono.setText("");
         txt_nit.setText("");
     }
-    private void actualizartabla(){
-        modelo1=new DefaultTableModel();   
-        modelo1.addColumn("CODIGO");      
+
+    private void actualizartabla() {
+        modelo1 = new DefaultTableModel();
+        modelo1.addColumn("CODIGO");
         modelo1.addColumn("NOMBRE");
-        modelo1.addColumn("APELLIDO");      
+        modelo1.addColumn("APELLIDO");
         modelo1.addColumn("NACIONALIDAD");
         modelo1.addColumn("DIRECCION");
         modelo1.addColumn("FRECUENCIA");
@@ -112,7 +81,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(5).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(6).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(7).setCellRenderer(centro);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(75);        
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(75);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
@@ -122,20 +91,21 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(7).setPreferredWidth(100);
         HuespedesDAO huespedes = new HuespedesDAO();
         List<Huespedes> listarmetodos = huespedes.select();
-        String datos[]= new String[8];
+        String datos[] = new String[8];
         for (Huespedes listar : listarmetodos) {
-                datos[0]=listar.getCodigo();
-               datos[1]=listar.getNombre();
-               datos[2]=listar.getApellido();
-               datos[3]=listar.getNacionalidad();
-               datos[4]=listar.getDireccion();
-               datos[5]=listar.getFrecuencia();
-               datos[6]=listar.getTelefono();
-               datos[7]=listar.getNit();
-               modelo1.addRow(datos);
-               tabla.setModel(modelo1);
+            datos[0] = listar.getCodigo();
+            datos[1] = listar.getNombre();
+            datos[2] = listar.getApellido();
+            datos[3] = listar.getNacionalidad();
+            datos[4] = listar.getDireccion();
+            datos[5] = listar.getFrecuencia();
+            datos[6] = listar.getTelefono();
+            datos[7] = listar.getNit();
+            modelo1.addRow(datos);
+            tabla.setModel(modelo1);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -450,29 +420,28 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText())) {
-            if (txt_codigo.getText().length()!=0&&txt_nombre.getText().length()!=0&&txt_apellido.getText().length()!=0&&
-                    txt_nacionalidad.getText().length()!=0&&txt_direccion.getText().length()!=0&&
-                    txt_frecuencia.getText().length()!=0&&txt_telefono.getText().length()!=0&&
-                    txt_nit.getText().length()!=0) {
-            HuespedesDAO huespedesdao = new HuespedesDAO();
-            Huespedes guardarmetodo = new Huespedes();
-            guardarmetodo.setCodigo(txt_codigo.getText());
-            guardarmetodo.setNombre(txt_nombre.getText());
-            guardarmetodo.setApellido(txt_apellido.getText());
-            guardarmetodo.setNacionalidad(txt_nacionalidad.getText());
-            guardarmetodo.setDireccion(txt_direccion.getText());
-            guardarmetodo.setFrecuencia(txt_frecuencia.getText());
-            guardarmetodo.setTelefono(txt_telefono.getText());
-            guardarmetodo.setNit(txt_nit.getText());
-            huespedesdao.insert(guardarmetodo);
-            actualizartabla();
-            JOptionPane.showMessageDialog(null, "Huesped guardado correctamente");
-            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                    guardarBitacora.GuardarEnBitacora("Insertar", (codigoAplicacion), Login.usuarioHoteleria);
-        }else{
-            JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
-        }
-        }else{
+            if (txt_codigo.getText().length() != 0 && txt_nombre.getText().length() != 0 && txt_apellido.getText().length() != 0
+                    && txt_nacionalidad.getText().length() != 0 && txt_direccion.getText().length() != 0
+                    && txt_frecuencia.getText().length() != 0 && txt_telefono.getText().length() != 0
+                    && txt_nit.getText().length() != 0) {
+                HuespedesDAO huespedesdao = new HuespedesDAO();
+                Huespedes guardarmetodo = new Huespedes();
+                guardarmetodo.setCodigo(txt_codigo.getText());
+                guardarmetodo.setNombre(txt_nombre.getText());
+                guardarmetodo.setApellido(txt_apellido.getText());
+                guardarmetodo.setNacionalidad(txt_nacionalidad.getText());
+                guardarmetodo.setDireccion(txt_direccion.getText());
+                guardarmetodo.setFrecuencia(txt_frecuencia.getText());
+                guardarmetodo.setTelefono(txt_telefono.getText());
+                guardarmetodo.setNit(txt_nit.getText());
+                huespedesdao.insert(guardarmetodo);
+                actualizartabla();
+                JOptionPane.showMessageDialog(null, "Huesped guardado correctamente");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "El No. de identificacion del huesped, unicamente pueden ser números");
         }
         limpiar();
@@ -480,29 +449,28 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
 
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText())) {
-            if (txt_codigo.getText().length()!=0&&txt_nombre.getText().length()!=0&&txt_apellido.getText().length()!=0&&
-                    txt_nacionalidad.getText().length()!=0&&txt_direccion.getText().length()!=0&&
-                    txt_frecuencia.getText().length()!=0&&txt_telefono.getText().length()!=0&&
-                    txt_nit.getText().length()!=0) {
-            HuespedesDAO huespedesdao = new HuespedesDAO();
-            Huespedes modificarmetodo = new Huespedes();
-            modificarmetodo.setCodigo(txt_codigo.getText());
-            modificarmetodo.setNombre(txt_nombre.getText());
-            modificarmetodo.setApellido(txt_apellido.getText());
-            modificarmetodo.setNacionalidad(txt_nacionalidad.getText());
-            modificarmetodo.setDireccion(txt_direccion.getText());
-            modificarmetodo.setFrecuencia(txt_frecuencia.getText());
-            modificarmetodo.setTelefono(txt_telefono.getText());
-            modificarmetodo.setNit(txt_nit.getText());
-            huespedesdao.update(modificarmetodo);
-            actualizartabla();
-            JOptionPane.showMessageDialog(null, "Huesped actualizado correctamente");
-            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                guardarBitacora.GuardarEnBitacora("Modificacion", (codigoAplicacion), Login.usuarioHoteleria);
-        }else{
-            JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
-        }
-        }else{
+            if (txt_codigo.getText().length() != 0 && txt_nombre.getText().length() != 0 && txt_apellido.getText().length() != 0
+                    && txt_nacionalidad.getText().length() != 0 && txt_direccion.getText().length() != 0
+                    && txt_frecuencia.getText().length() != 0 && txt_telefono.getText().length() != 0
+                    && txt_nit.getText().length() != 0) {
+                HuespedesDAO huespedesdao = new HuespedesDAO();
+                Huespedes modificarmetodo = new Huespedes();
+                modificarmetodo.setCodigo(txt_codigo.getText());
+                modificarmetodo.setNombre(txt_nombre.getText());
+                modificarmetodo.setApellido(txt_apellido.getText());
+                modificarmetodo.setNacionalidad(txt_nacionalidad.getText());
+                modificarmetodo.setDireccion(txt_direccion.getText());
+                modificarmetodo.setFrecuencia(txt_frecuencia.getText());
+                modificarmetodo.setTelefono(txt_telefono.getText());
+                modificarmetodo.setNit(txt_nit.getText());
+                huespedesdao.update(modificarmetodo);
+                actualizartabla();
+                JOptionPane.showMessageDialog(null, "Huesped actualizado correctamente");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "El No. de indentificacion esta Vacio");
         }
         limpiar();
@@ -528,30 +496,29 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             txt_frecuencia.setText(buscarmetodo.getFrecuencia());
             txt_telefono.setText(buscarmetodo.getTelefono());
             txt_nit.setText(buscarmetodo.getNit());
-        }else{
-            JOptionPane.showMessageDialog(null,"El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
+        } else {
+            JOptionPane.showMessageDialog(null, "El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
         }
     }//GEN-LAST:event_BtnBusActionPerformed
 
     private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         // TODO add your handling code here:
-        if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText())&& txt_codigo.getText().length()!=0 
-            && txt_nombre.getText().length() != 0 && txt_apellido.getText().length() != 0 && txt_nacionalidad.getText().length()!=0
-                && txt_direccion.getText().length()!=0 && txt_frecuencia.getText().length()!=0 && txt_telefono.getText().length()!=0
-                && txt_nit.getText().length()!=0) {
+        if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText()) && txt_codigo.getText().length() != 0
+                && txt_nombre.getText().length() != 0 && txt_apellido.getText().length() != 0 && txt_nacionalidad.getText().length() != 0
+                && txt_direccion.getText().length() != 0 && txt_frecuencia.getText().length() != 0 && txt_telefono.getText().length() != 0
+                && txt_nit.getText().length() != 0) {
             HuespedesDAO modulosDAO = new HuespedesDAO();
             Huespedes moduloEliminar = new Huespedes();
             moduloEliminar.setCodigo(txt_codigo.getText());
             modulosDAO.delete(moduloEliminar);
             actualizartabla();
             JOptionPane.showMessageDialog(null, "Huesped eliminado correctamente");
-            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-            guardarBitacora.GuardarEnBitacora("Eliminacion", (codigoAplicacion), Login.usuarioHoteleria);
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "El No. de indentificacion esta vacio");
-                //Si el campo esta vacio o no inserta números muestra un mensaje de error
+            //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
-            limpiar();
+        limpiar();
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -572,18 +539,18 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-    MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-    MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
 
     private Connection connection = null;
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Map p = new HashMap();
+        /*Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
@@ -598,7 +565,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_codigoKeyTyped

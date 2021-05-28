@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Hoteleria.dominio.FormasDePago;
+import Controlador.FormasDePago;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +30,7 @@ public class FormasDePagoDAO {
         PreparedStatement stmt = null;
         int rows = 0;
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, formasdepago.getId());
             stmt.setString(2, formasdepago.getNombre());
@@ -44,8 +44,8 @@ public class FormasDePagoDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;
@@ -56,7 +56,7 @@ public class FormasDePagoDAO {
         int rows = 0;
         
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
 //          System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, formasdepago.getNombre());
@@ -70,8 +70,8 @@ public class FormasDePagoDAO {
             ex.printStackTrace(System.out);
         }
         finally{
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         
         return rows;
@@ -84,7 +84,7 @@ public class FormasDePagoDAO {
         List<FormasDePago> metodo = new ArrayList<FormasDePago>();
         
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while(rs.next()){
@@ -107,9 +107,9 @@ public class FormasDePagoDAO {
             ex.printStackTrace(System.out);
         }
         finally{
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         
         return metodo;
@@ -121,7 +121,7 @@ public class FormasDePagoDAO {
         int rows = 0;
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, formasdepago.getId());
@@ -142,9 +142,9 @@ public class FormasDePagoDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return formasdepago;
     }
@@ -153,7 +153,7 @@ public class FormasDePagoDAO {
         PreparedStatement stmt = null;
         int rows = 0;
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setString(1, formasdepago.getId());
@@ -162,8 +162,8 @@ public class FormasDePagoDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;

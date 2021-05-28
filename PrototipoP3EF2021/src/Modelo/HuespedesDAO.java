@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Hoteleria.dominio.Huespedes;
+import Controlador.Huespedes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +29,7 @@ public class HuespedesDAO {
         PreparedStatement stmt = null;
         int rows = 0;
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1, huespedes.getCodigo());
             stmt.setString(2, huespedes.getNombre());
@@ -47,8 +47,8 @@ public class HuespedesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;
@@ -59,7 +59,7 @@ public class HuespedesDAO {
         int rows = 0;
         
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
 //          System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(8, huespedes.getCodigo());
@@ -77,8 +77,8 @@ public class HuespedesDAO {
             ex.printStackTrace(System.out);
         }
         finally{
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         
         return rows;
@@ -91,7 +91,7 @@ public class HuespedesDAO {
         List<Huespedes> metodo = new ArrayList<Huespedes>();
         
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while(rs.next()){
@@ -123,9 +123,9 @@ public class HuespedesDAO {
             ex.printStackTrace(System.out);
         }
         finally{
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         
         return metodo;
@@ -137,7 +137,7 @@ public class HuespedesDAO {
         int rows = 0;
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, huespedes.getCodigo());
@@ -167,9 +167,9 @@ public class HuespedesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return huespedes;
     }
@@ -178,7 +178,7 @@ public class HuespedesDAO {
         PreparedStatement stmt = null;
         int rows = 0;
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setString(1, modulos.getCodigo());
@@ -187,8 +187,8 @@ public class HuespedesDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;

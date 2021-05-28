@@ -10,9 +10,9 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Hoteleria.datos.AmaDeLlavesDAO;
-import Hoteleria.datos.ConexionHoteleria;
-import Hoteleria.dominio.AmaDeLlaves;
+import Modelo.AmaDeLlavesDAO;
+import Modelo.Conexion;
+import Controlador.AmaDeLlaves;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,14 +21,12 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
-import net.sf.jasperreports.engine.JasperCompileManager;
+/*import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
-import seguridad.vista.GenerarPermisos;
-import seguridad.vista.Login;
-import Hoteleria.datos.GuardarBitacoraDAO;
+import net.sf.jasperreports.view.JasperViewer;*/
+
 
 /**
  *
@@ -40,46 +38,12 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
     ButtonGroup grupoDeRadios;
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
-    int codigoAplicacion = 2001;
-
-    void habilitarAcciones() {
-
-        codigoAplicacion = 2001;
-        var usuario = Login.usuarioHoteleria;
-
-        btnAgregar.setEnabled(false);
-        btnModificar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-        btnBuscar.setEnabled(false);
-
-        GenerarPermisos permisos = new GenerarPermisos();
-
-        String[] permisosApp = new String[5];
-
-        for (int i = 0; i < 5; i++) {
-            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
-        }
-
-        if (permisosApp[0].equals("1")) {
-            btnAgregar.setEnabled(true);
-        }
-        if (permisosApp[1].equals("1")) {
-            btnBuscar.setEnabled(true);
-        }
-        if (permisosApp[2].equals("1")) {
-            btnModificar.setEnabled(true);
-        }
-        if (permisosApp[3].equals("1")) {
-            btnEliminar.setEnabled(true);
-        }
-    }
 
     /**
      * Creates new form MantenimientoAplicacion
      */
     public Mantenimiento_AmaDeLlaves() {
         initComponents();
-        habilitarAcciones();
         cargarCombobox.llenarCbx(cbxPiso);
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
@@ -588,8 +552,6 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
                     btnRadioVacio.setSelected(true);
                     limpiar();
                     ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
-                    GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                    guardarBitacora.GuardarEnBitacora("Insertar", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Los horarios de entrada y salida no pueden ser iguales.");
@@ -638,8 +600,6 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
                 limpiar();
                 jdateInicio.setEnabled(true);
-                GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                guardarBitacora.GuardarEnBitacora("Modificacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Los horarios de entrada y salida no pueden ser iguales.");
@@ -663,8 +623,6 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
                 tabla();
                 limpiar();
                 jdateInicio.setEnabled(true);
-                GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                guardarBitacora.GuardarEnBitacora("Eliminacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se ha ingresado ID a eliminar");
@@ -777,7 +735,7 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
 
-        Map p = new HashMap();
+       /* Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
@@ -792,7 +750,7 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -805,11 +763,11 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-        MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
 
 

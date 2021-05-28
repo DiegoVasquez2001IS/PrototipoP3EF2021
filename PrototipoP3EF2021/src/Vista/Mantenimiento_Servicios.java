@@ -5,10 +5,9 @@
  */
 package Vista;
 
-import Hoteleria.datos.ConexionHoteleria;
-import Hoteleria.datos.GuardarBitacoraDAO;
-import Hoteleria.datos.ServiciosDAO;
-import Hoteleria.dominio.Servicios;
+import Modelo.Conexion;
+import Modelo.ServiciosDAO;
+import Controlador.Servicios;
 import java.io.File;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -21,75 +20,42 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JasperCompileManager;
+
+/*import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
-import seguridad.datos.BitacoraDao;
-import seguridad.dominio.Bitacora;
-import seguridad.vista.Aplicacion_Perfil;
-import seguridad.vista.GenerarPermisos;
-import seguridad.vista.Login;
-
+import net.sf.jasperreports.view.JasperViewer;*/
 /**
  *
  * @author leone
  */
 public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
+
     DefaultTableModel modelo1;
-    DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
-    String codigoAplicacion="2006";
-    void habilitarAcciones() {
+    DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    String codigoAplicacion = "2006";
 
-        var codigoAplicacion = 2006;
-        var usuario = Login.usuarioHoteleria;
-
-        BtnIng.setEnabled(false);
-        BtnMod.setEnabled(false);
-        BtnElim.setEnabled(false);
-        BtnBus.setEnabled(false);
-
-        GenerarPermisos permisos = new GenerarPermisos();
-
-        String[] permisosApp = new String[5];
-
-        for (int i = 0; i < 5; i++) {
-            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
-        }
-
-        if (permisosApp[0].equals("1")) {
-            BtnIng.setEnabled(true);
-        }
-        if (permisosApp[1].equals("1")) {
-            BtnBus.setEnabled(true);
-        }
-        if (permisosApp[2].equals("1")) {
-            BtnMod.setEnabled(true);
-        }
-        if (permisosApp[3].equals("1")) {
-            BtnElim.setEnabled(true);
-        }
-    }
     /**
      * Creates new form Mantenimiento_Servicios
      */
     public Mantenimiento_Servicios() {
         initComponents();
-        habilitarAcciones();
         aux_tipo.setVisible(false);
         aux_estado.setVisible(false);
         actualizartabla();
     }
-    private static boolean isNumeric(String cadena){
+
+    private static boolean isNumeric(String cadena) {
         try {
-                Integer.parseInt(cadena);
-                return true;
-        } catch (NumberFormatException nfe){
-                return false;
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
         }
     }
-    private void limpiar(){
+
+    private void limpiar() {
         aux_estado.setSelected(true);
         aux_tipo.setSelected(true);
         txt_id.setText("");
@@ -97,13 +63,14 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         txt_descripcion.setText("");
         txt_precio.setText("");
     }
-    private void actualizartabla(){
-        modelo1=new DefaultTableModel();   
-        modelo1.addColumn("ID");      
+
+    private void actualizartabla() {
+        modelo1 = new DefaultTableModel();
+        modelo1.addColumn("ID");
         modelo1.addColumn("NOMBRE");
-        modelo1.addColumn("DESCRIPCION");  
-        modelo1.addColumn("PRECIO");     
-        modelo1.addColumn("TIPO");    
+        modelo1.addColumn("DESCRIPCION");
+        modelo1.addColumn("PRECIO");
+        modelo1.addColumn("TIPO");
         modelo1.addColumn("ESTADO");
         tabla.setModel(modelo1);
         centro.setHorizontalAlignment(JLabel.CENTER);
@@ -113,28 +80,29 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(3).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(4).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(5).setCellRenderer(centro);
-        
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(25);        
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(25);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(75);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(275);
         tabla.getColumnModel().getColumn(3).setPreferredWidth(75);
         tabla.getColumnModel().getColumn(4).setPreferredWidth(75);
         tabla.getColumnModel().getColumn(5).setPreferredWidth(75);
-        
+
         ServiciosDAO serviciosdao = new ServiciosDAO();
         List<Servicios> servicios = serviciosdao.select();
-        String datos[]= new String[6];
+        String datos[] = new String[6];
         for (Servicios servicio : servicios) {
-               datos[0]=servicio.getId();
-               datos[1]=servicio.getNombre();
-               datos[2]=servicio.getDescripcion();
-               datos[3]=servicio.getPrecio();
-               datos[4]=servicio.getTipo();  
-               datos[5]=servicio.getEstado();  
-               modelo1.addRow(datos);
-               tabla.setModel(modelo1);
+            datos[0] = servicio.getId();
+            datos[1] = servicio.getNombre();
+            datos[2] = servicio.getDescripcion();
+            datos[3] = servicio.getPrecio();
+            datos[4] = servicio.getTipo();
+            datos[5] = servicio.getEstado();
+            modelo1.addRow(datos);
+            tabla.setModel(modelo1);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -443,46 +411,9 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
-    if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
-        if (txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&txt_id.getText().length()!=0&&(
-            txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())
-            &&txt_precio.getText().length()!=0) {
-            ServiciosDAO serviciosdao = new ServiciosDAO();
-            Servicios servicios = new Servicios();
-            servicios.setId(txt_id.getText());
-            servicios.setNombre(txt_nombre.getText());
-            servicios.setDescripcion(txt_descripcion.getText());
-            
-            if (txt_basico.isSelected()) {
-                servicios.setTipo("1");
-            }else if(txt_adicional.isSelected()){
-                servicios.setTipo("2");
-            }
-            
-            if (txt_activo.isSelected()) {
-                servicios.setEstado("1");
-            }else if(txt_inactivo.isSelected()){
-                servicios.setEstado("0");
-            }
-            servicios.setPrecio(txt_precio.getText());
-            serviciosdao.insert(servicios);
-            JOptionPane.showMessageDialog(null, "Servicio agregado correctamente");
-            limpiar();actualizartabla();
-            GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
-            guardaraccion.GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioHoteleria);
-        }else{
-            JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
-        }
-    }else{
-        JOptionPane.showMessageDialog(null, "El ID del servicio solo lleva números, intentelo nuevamente");
-    }
-    }//GEN-LAST:event_BtnIngActionPerformed
-
-    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
-    if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
-        if (txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&txt_id.getText().length()!=0&&(
-            txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())
-            &&txt_precio.getText().length()!=0) {
+        if (Mantenimiento_Servicios.isNumeric(txt_id.getText())) {
+            if (txt_nombre.getText().length() != 0 && txt_descripcion.getText().length() != 0 && txt_id.getText().length() != 0 && (txt_basico.isSelected() || txt_adicional.isSelected()) && (txt_activo.isSelected() || txt_inactivo.isSelected())
+                    && txt_precio.getText().length() != 0) {
                 ServiciosDAO serviciosdao = new ServiciosDAO();
                 Servicios servicios = new Servicios();
                 servicios.setId(txt_id.getText());
@@ -491,27 +422,62 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
 
                 if (txt_basico.isSelected()) {
                     servicios.setTipo("1");
-                }else if(txt_adicional.isSelected()){
+                } else if (txt_adicional.isSelected()) {
                     servicios.setTipo("2");
                 }
 
                 if (txt_activo.isSelected()) {
                     servicios.setEstado("1");
-                }else if(txt_inactivo.isSelected()){
+                } else if (txt_inactivo.isSelected()) {
+                    servicios.setEstado("0");
+                }
+                servicios.setPrecio(txt_precio.getText());
+                serviciosdao.insert(servicios);
+                JOptionPane.showMessageDialog(null, "Servicio agregado correctamente");
+                limpiar();
+                actualizartabla();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El ID del servicio solo lleva números, intentelo nuevamente");
+        }
+    }//GEN-LAST:event_BtnIngActionPerformed
+
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
+        if (Mantenimiento_Servicios.isNumeric(txt_id.getText())) {
+            if (txt_nombre.getText().length() != 0 && txt_descripcion.getText().length() != 0 && txt_id.getText().length() != 0 && (txt_basico.isSelected() || txt_adicional.isSelected()) && (txt_activo.isSelected() || txt_inactivo.isSelected())
+                    && txt_precio.getText().length() != 0) {
+                ServiciosDAO serviciosdao = new ServiciosDAO();
+                Servicios servicios = new Servicios();
+                servicios.setId(txt_id.getText());
+                servicios.setNombre(txt_nombre.getText());
+                servicios.setDescripcion(txt_descripcion.getText());
+
+                if (txt_basico.isSelected()) {
+                    servicios.setTipo("1");
+                } else if (txt_adicional.isSelected()) {
+                    servicios.setTipo("2");
+                }
+
+                if (txt_activo.isSelected()) {
+                    servicios.setEstado("1");
+                } else if (txt_inactivo.isSelected()) {
                     servicios.setEstado("0");
                 }
                 servicios.setPrecio(txt_precio.getText());
                 serviciosdao.update(servicios);
                 JOptionPane.showMessageDialog(null, "Servicio modificado correctamente");
-                limpiar();actualizartabla();
-                GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
-                guardaraccion.GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioHoteleria);    
-        }else{
-            JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
+                limpiar();
+                actualizartabla();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El ID del servicio solo lleva números, intentelo nuevamente");
         }
-    }else{
-        JOptionPane.showMessageDialog(null, "El ID del servicio solo lleva números, intentelo nuevamente");
-    }
     }//GEN-LAST:event_BtnModActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -519,48 +485,47 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
-    if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
-        ServiciosDAO serviciodao = new ServiciosDAO();
-        Servicios servicio = new Servicios();
-        
-        servicio.setId(txt_id.getText());
-        servicio = serviciodao.query(servicio);
-        txt_nombre.setText(servicio.getNombre());
-        txt_descripcion.setText(servicio.getDescripcion());
+        if (Mantenimiento_Servicios.isNumeric(txt_id.getText())) {
+            ServiciosDAO serviciodao = new ServiciosDAO();
+            Servicios servicio = new Servicios();
+
+            servicio.setId(txt_id.getText());
+            servicio = serviciodao.query(servicio);
+            txt_nombre.setText(servicio.getNombre());
+            txt_descripcion.setText(servicio.getDescripcion());
             if ("0".equals(servicio.getEstado())) {
                 txt_inactivo.setSelected(true);
-                }else if("1".equals(servicio.getEstado())){
-                    txt_activo.setSelected(true);
-                }
+            } else if ("1".equals(servicio.getEstado())) {
+                txt_activo.setSelected(true);
+            }
             if ("1".equals(servicio.getTipo())) {
                 txt_basico.setSelected(true);
-            }else if("2".equals(servicio.getTipo())){
+            } else if ("2".equals(servicio.getTipo())) {
                 txt_adicional.setSelected(true);
             }
             txt_precio.setText(servicio.getPrecio());
-        
-    }
+
+        }
     }//GEN-LAST:event_BtnBusActionPerformed
 
     private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
-    if (Mantenimiento_Servicios.isNumeric(txt_id.getText())) {
-        ServiciosDAO serviciosdao = new ServiciosDAO();
-        Servicios eliminarservicio = new Servicios();
-        eliminarservicio.setId(txt_id.getText());
-        serviciosdao.delete(eliminarservicio);
-        
-        JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
-        actualizartabla();
-        limpiar();        
-        GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
-        guardaraccion.GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioHoteleria);
-     }else{
-         JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
-     }
+        if (Mantenimiento_Servicios.isNumeric(txt_id.getText())) {
+            ServiciosDAO serviciosdao = new ServiciosDAO();
+            Servicios eliminarservicio = new Servicios();
+            eliminarservicio.setId(txt_id.getText());
+            serviciosdao.delete(eliminarservicio);
+
+            JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
+            actualizartabla();
+            limpiar();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
+        }
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
-    try {
+        try {
             if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaServicios.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
@@ -576,19 +541,19 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnAyudaActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-    MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-    MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
     private Connection connection = null;
 
     private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
-        Map p = new HashMap();
+        /*Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
-        
+
         try {
             connection = ConexionHoteleria.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
@@ -600,7 +565,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_BtnReporteActionPerformed
 
 

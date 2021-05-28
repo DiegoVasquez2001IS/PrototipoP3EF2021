@@ -82,6 +82,11 @@ public class JFrmMDI extends javax.swing.JFrame {
         JMenuCatalogos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         Amadellaves.setText("Ama de Llaves");
+        Amadellaves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AmadellavesActionPerformed(evt);
+            }
+        });
         JMenuCatalogos.add(Amadellaves);
 
         Habitaciones.setText("Habitaciones");
@@ -150,6 +155,12 @@ public class JFrmMDI extends javax.swing.JFrame {
             frmLogin.setVisible(true);
         }
     }//GEN-LAST:event_JMICSActionPerformed
+
+    private void AmadellavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmadellavesActionPerformed
+        Mantenimiento_AmaDeLlaves frmAmadellaves = new Mantenimiento_AmaDeLlaves();
+        frmAmadellaves.setVisible(true);
+        JDPMDIContainer.add(frmAmadellaves);
+    }//GEN-LAST:event_AmadellavesActionPerformed
 
     /**
      * @param args the command line arguments

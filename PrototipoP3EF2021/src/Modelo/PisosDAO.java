@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Hoteleria.dominio.Pisos;
+import Controlador.Pisos;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class PisosDAO {
         List<Pisos> pisos = new ArrayList<Pisos>();
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -57,9 +57,9 @@ public class PisosDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return pisos;
     }
@@ -69,7 +69,7 @@ public class PisosDAO {
         PreparedStatement stmt = null;
         int rows = 0;
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, pisos.getId_Numero_De_Piso());
             stmt.setInt(2, pisos.getCantidad_De_Habitaciones());
@@ -80,8 +80,8 @@ public class PisosDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;
@@ -93,7 +93,7 @@ public class PisosDAO {
         int rows = 0;
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setInt(1, pisos.getCantidad_De_Habitaciones());
             stmt.setString(2, pisos.getDescripcion_De_Piso());
@@ -103,8 +103,8 @@ public class PisosDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return rows;
     }
@@ -118,7 +118,7 @@ public class PisosDAO {
 
         try {
 
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setInt(1, pisos.getId_Numero_De_Piso());
@@ -140,9 +140,9 @@ public class PisosDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
         return pisos;
     }
@@ -154,7 +154,7 @@ public class PisosDAO {
         int rows = 0;
 
         try {
-            conn = ConexionHoteleria.getConnection();
+            conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, pisos.getId_Numero_De_Piso());
@@ -163,8 +163,8 @@ public class PisosDAO {
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(conn);
         }
 
         return rows;

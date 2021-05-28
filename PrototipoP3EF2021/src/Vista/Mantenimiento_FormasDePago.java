@@ -5,10 +5,9 @@
  */
 package Vista;
 
-import Hoteleria.datos.ConexionHoteleria;
-import Hoteleria.datos.FormasDePagoDAO;
-import Hoteleria.datos.GuardarBitacoraDAO;
-import Hoteleria.dominio.FormasDePago;
+import Modelo.Conexion;
+import Modelo.FormasDePagoDAO;
+import Controlador.FormasDePago;
 import java.io.File;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -21,87 +20,54 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JasperCompileManager;
+
+/*import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
-import seguridad.datos.BitacoraDao;
-import seguridad.dominio.Bitacora;
-import seguridad.vista.Aplicacion_Perfil;
-import seguridad.vista.GenerarPermisos;
-import seguridad.vista.Login;
+import net.sf.jasperreports.view.JasperViewer;*/
 
 /**
  *
  * @author leone
  */
 public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
+
     DefaultTableModel modelo1;
-    DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
-    String codigoAplicacion="2002";
+    DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    String codigoAplicacion = "2002";
+
     /**
      * Creates new form Mantenimiento_FomasDePago
      */
-    void habilitarAcciones() {
-
-        var codigoAplicacion = 2002;
-        var usuario = Login.usuarioHoteleria;
-
-        BtnIng.setEnabled(false);
-        BtnMod.setEnabled(false);
-        BtnElim.setEnabled(false);
-        BtnBus.setEnabled(false);
-
-        GenerarPermisos permisos = new GenerarPermisos();
-
-        String[] permisosApp = new String[5];
-
-        for (int i = 0; i < 5; i++) {
-            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
-        }
-
-        if (permisosApp[0].equals("1")) {
-            System.out.println(permisosApp[0]);
-            BtnIng.setEnabled(true);
-        }
-        if (permisosApp[1].equals("1")) {
-            BtnBus.setEnabled(true);
-        }
-        if (permisosApp[2].equals("1")) {
-            BtnMod.setEnabled(true);
-        }
-        if (permisosApp[3].equals("1")) {
-            BtnElim.setEnabled(true);
-        }
-    }
 
     public Mantenimiento_FormasDePago() {
         initComponents();
-        habilitarAcciones();
         limpio.setVisible(false);
         actualizartabla();
     }
-    
-    private static boolean isNumeric(String cadena){
+
+    private static boolean isNumeric(String cadena) {
         try {
-                Integer.parseInt(cadena);
-                return true;
-        } catch (NumberFormatException nfe){
-                return false;
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
         }
     }
-    private void limpiar(){
+
+    private void limpiar() {
         limpio.setSelected(true);
         txt_codigo.setText("");
         txt_nombre.setText("");
         txt_descripcion.setText("");
     }
-    private void actualizartabla(){
-        modelo1=new DefaultTableModel();   
-        modelo1.addColumn("CODIGO");      
+
+    private void actualizartabla() {
+        modelo1 = new DefaultTableModel();
+        modelo1.addColumn("CODIGO");
         modelo1.addColumn("NOMBRE");
-        modelo1.addColumn("DESCRIPCION");      
+        modelo1.addColumn("DESCRIPCION");
         modelo1.addColumn("ESTADO");
         tabla.setModel(modelo1);
         centro.setHorizontalAlignment(JLabel.CENTER);
@@ -109,21 +75,22 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(0).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(1).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(3).setCellRenderer(centro);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(25);        
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(25);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(350);
         FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
         List<FormasDePago> listarmetodos = formasdepagodao.select();
-        String datos[]= new String[4];
+        String datos[] = new String[4];
         for (FormasDePago listar : listarmetodos) {
-                datos[0]=listar.getId();
-               datos[1]=listar.getNombre();
-               datos[2]=listar.getDescripcion();
-               datos[3]=listar.getEstado();  
-               modelo1.addRow(datos);
-               tabla.setModel(modelo1);
+            datos[0] = listar.getId();
+            datos[1] = listar.getNombre();
+            datos[2] = listar.getDescripcion();
+            datos[3] = listar.getEstado();
+            modelo1.addRow(datos);
+            tabla.setModel(modelo1);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -388,79 +355,77 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
-           if (txt_codigo.getText().length()!=0&&txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&(activo.isSelected() ||
-            inactivo.isSelected())) {
+            if (txt_codigo.getText().length() != 0 && txt_nombre.getText().length() != 0 && txt_descripcion.getText().length() != 0 && (activo.isSelected()
+                    || inactivo.isSelected())) {
                 FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
                 FormasDePago guardarmetodo = new FormasDePago();
                 guardarmetodo.setId(txt_codigo.getText());
                 guardarmetodo.setNombre(txt_nombre.getText());
                 guardarmetodo.setDescripcion(txt_descripcion.getText());
-                    if (activo.isSelected()) {
-                        guardarmetodo.setEstado("1");
-                        }else if(inactivo.isSelected()){
-                            guardarmetodo.setEstado("0");
-                            }
-                    formasdepagodao.insert(guardarmetodo);
-                    actualizartabla();
-                    GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
-                    guardaraccion.GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioHoteleria);
-                    JOptionPane.showMessageDialog(null, "Metodo de pago guardado correctamente");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+                if (activo.isSelected()) {
+                    guardarmetodo.setEstado("1");
+                } else if (inactivo.isSelected()) {
+                    guardarmetodo.setEstado("0");
                 }
-        }else{
+                formasdepagodao.insert(guardarmetodo);
+                actualizartabla();
+                
+                JOptionPane.showMessageDialog(null, "Metodo de pago guardado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "El codigo del metodo de pago, unicamente pueden ser números");
         }
         limpiar();
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
-    if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
-           if (txt_codigo.getText().length()!=0&&txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&(activo.isSelected() ||
-            inactivo.isSelected())) {
+        if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
+            if (txt_codigo.getText().length() != 0 && txt_nombre.getText().length() != 0 && txt_descripcion.getText().length() != 0 && (activo.isSelected()
+                    || inactivo.isSelected())) {
                 FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
                 FormasDePago modificarmetodo = new FormasDePago();
                 modificarmetodo.setId(txt_codigo.getText());
                 modificarmetodo.setNombre(txt_nombre.getText());
                 modificarmetodo.setDescripcion(txt_descripcion.getText());
-                    if (activo.isSelected()) {
-                        modificarmetodo.setEstado("1");
-                        }else if(inactivo.isSelected()){
-                            modificarmetodo.setEstado("0");
-                            }
-                    formasdepagodao.update(modificarmetodo);
-                    actualizartabla();
-                    GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
-                    guardaraccion.GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioHoteleria);
-                    JOptionPane.showMessageDialog(null, "Metodo de pago actualizado correctamente");
-                }else{
-                    JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
-                }            
-        }else{
+                if (activo.isSelected()) {
+                    modificarmetodo.setEstado("1");
+                } else if (inactivo.isSelected()) {
+                    modificarmetodo.setEstado("0");
+                }
+                formasdepagodao.update(modificarmetodo);
+                actualizartabla();
+                
+                JOptionPane.showMessageDialog(null, "Metodo de pago actualizado correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "El codigo del metodo de pago, unicamente pueden ser números");
         }
-    limpiar();
+        limpiar();
     }//GEN-LAST:event_BtnModActionPerformed
 
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
-    if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
-    
-        FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
-        FormasDePago buscarmetodo = new FormasDePago();
-        
-        buscarmetodo.setId(txt_codigo.getText());
-        buscarmetodo = formasdepagodao.query(buscarmetodo);
-        
-        txt_nombre.setText(buscarmetodo.getNombre());
-        txt_descripcion.setText(buscarmetodo.getDescripcion());
+        if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
+
+            FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
+            FormasDePago buscarmetodo = new FormasDePago();
+
+            buscarmetodo.setId(txt_codigo.getText());
+            buscarmetodo = formasdepagodao.query(buscarmetodo);
+
+            txt_nombre.setText(buscarmetodo.getNombre());
+            txt_descripcion.setText(buscarmetodo.getDescripcion());
             if ("0".equals(buscarmetodo.getEstado())) {
                 inactivo.setSelected(true);
-                }else if("1".equals(buscarmetodo.getEstado())){
-                    activo.setSelected(true);
-                }
-    }else{
-        JOptionPane.showMessageDialog(null,"El codigo esta vacio y/o el codigo debe de ser solo números");
-    }
+            } else if ("1".equals(buscarmetodo.getEstado())) {
+                activo.setSelected(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El codigo esta vacio y/o el codigo debe de ser solo números");
+        }
     }//GEN-LAST:event_BtnBusActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -468,24 +433,22 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
-     if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
-        FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
-        FormasDePago eliminarmetodo = new FormasDePago();
-        eliminarmetodo.setId(txt_codigo.getText());
-        formasdepagodao.delete(eliminarmetodo);
-        JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
-        actualizartabla();
-        limpiar();          
-        GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
-        guardaraccion.GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioHoteleria);
-       
-     }else{
-         JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
-     }
+        if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
+            FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
+            FormasDePago eliminarmetodo = new FormasDePago();
+            eliminarmetodo.setId(txt_codigo.getText());
+            formasdepagodao.delete(eliminarmetodo);
+            JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
+            actualizartabla();
+            limpiar();
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
+        }
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ayudaActionPerformed
-try {
+        try {
             if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaFormasDePago.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
@@ -501,18 +464,18 @@ try {
     }//GEN-LAST:event_btn_ayudaActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-    MDIHoteleria.logo.setVisible(true);
+       // MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-    MDIHoteleria.logo.setVisible(true);
+       // MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
-private Connection connection = null;
+    private Connection connection = null;
     private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
-        Map p = new HashMap();
+        /*Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
-        
+
         try {
             connection = ConexionHoteleria.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
@@ -524,7 +487,7 @@ private Connection connection = null;
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_BtnReporteActionPerformed
 
 

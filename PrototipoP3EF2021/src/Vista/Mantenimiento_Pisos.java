@@ -6,26 +6,24 @@
 package Vista;
 
 import Modelo.Conexion;
-import Modelo.GuardarBitacoraDAO;
 import java.io.File;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Modelo.PisosDAO;
-import Modelo.dominio.Pisos;
+import Controlador.Pisos;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
-import net.sf.jasperreports.engine.JasperCompileManager;
+/*import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
-import seguridad.vista.GenerarPermisos;
-import seguridad.vista.Login;
+import net.sf.jasperreports.view.JasperViewer;*/
+
 
 /**
  *
@@ -37,45 +35,12 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
     int codigoAplicacion = 2005;
-
-    void habilitarAcciones() {
-
-        codigoAplicacion = 2005;
-        var usuario = Login.usuarioHoteleria;
-
-        btnAgregar.setEnabled(false);
-        btnModificar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-        btnBuscar.setEnabled(false);
-
-        GenerarPermisos permisos = new GenerarPermisos();
-
-        String[] permisosApp = new String[5];
-
-        for (int i = 0; i < 5; i++) {
-            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
-        }
-
-        if (permisosApp[0].equals("1")) {
-            btnAgregar.setEnabled(true);
-        }
-        if (permisosApp[1].equals("1")) {
-            btnBuscar.setEnabled(true);
-        }
-        if (permisosApp[2].equals("1")) {
-            btnModificar.setEnabled(true);
-        }
-        if (permisosApp[3].equals("1")) {
-            btnEliminar.setEnabled(true);
-        }
-    }
-
+    
     /**
      * Creates new form MantenimientoAplicacion
      */
     public Mantenimiento_Pisos() {
         initComponents();
-        habilitarAcciones();
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
         grupoDeRadios.add(btnRadioInactivo);
@@ -460,8 +425,7 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
             btnRadioVacio.setSelected(true);
             limpiar();
             pisosDAO.insert(pisosInsertar);
-            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-            guardarBitacora.GuardarEnBitacora("Insertar", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
         }
@@ -492,8 +456,7 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
                 limpiar();
                 pisosDAO.update(pisosModificar);
                 JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
-                GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                guardarBitacora.GuardarEnBitacora("Modificacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
@@ -596,8 +559,7 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
                 btnRadioVacio.setSelected(true);
                 tabla();
                 limpiar();
-                GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                guardarBitacora.GuardarEnBitacora("Eliminacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se ha ingresado ID a eliminar");
@@ -608,7 +570,7 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
 
-        Map p = new HashMap();
+       /* Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
@@ -623,7 +585,7 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -636,11 +598,11 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        MDIHoteleria.logo.setVisible(true);
+        //MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-        MDIHoteleria.logo.setVisible(true);
+       // MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
 
 
