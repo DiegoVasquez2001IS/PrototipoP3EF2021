@@ -449,7 +449,7 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
 
     private void btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ayudaActionPerformed
         try {
-            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaFormasDePago.chm")).exists()) {
+            if ((new File("src\\main\\java\\Ayudas\\AyudaFormasDePago.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
                         .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaFormasDePago.chm");
