@@ -90,18 +90,43 @@ public class JFrmMDI extends javax.swing.JFrame {
         JMenuCatalogos.add(Amadellaves);
 
         Habitaciones.setText("Habitaciones");
+        Habitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HabitacionesActionPerformed(evt);
+            }
+        });
         JMenuCatalogos.add(Habitaciones);
 
         Servicios.setText("Servicios");
+        Servicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ServiciosActionPerformed(evt);
+            }
+        });
         JMenuCatalogos.add(Servicios);
 
         Formasdepago.setText("Formas de Pago");
+        Formasdepago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FormasdepagoActionPerformed(evt);
+            }
+        });
         JMenuCatalogos.add(Formasdepago);
 
         Huespedes.setText("Huespedes");
+        Huespedes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HuespedesActionPerformed(evt);
+            }
+        });
         JMenuCatalogos.add(Huespedes);
 
         Pisos.setText("Pisos");
+        Pisos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PisosActionPerformed(evt);
+            }
+        });
         JMenuCatalogos.add(Pisos);
 
         JMenuBarMDI.add(JMenuCatalogos);
@@ -162,15 +187,44 @@ public class JFrmMDI extends javax.swing.JFrame {
         JDPMDIContainer.add(frmAmadellaves);
     }//GEN-LAST:event_AmadellavesActionPerformed
 
+    private void HabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HabitacionesActionPerformed
+        Mantenimiento_habitaciones frmMantHab = new Mantenimiento_habitaciones();
+        frmMantHab.setVisible(true);
+        JDPMDIContainer.add(frmMantHab);
+    }//GEN-LAST:event_HabitacionesActionPerformed
+
+    private void ServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiciosActionPerformed
+        Mantenimiento_Servicios frmMantServ = new Mantenimiento_Servicios();
+        frmMantServ.setVisible(true);
+        JDPMDIContainer.add(frmMantServ);
+    }//GEN-LAST:event_ServiciosActionPerformed
+
+    private void FormasdepagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FormasdepagoActionPerformed
+        Mantenimiento_FormasDePago frmMantFP = new Mantenimiento_FormasDePago();
+        frmMantFP.setVisible(true);
+        JDPMDIContainer.add(frmMantFP);
+    }//GEN-LAST:event_FormasdepagoActionPerformed
+
+    private void HuespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HuespedesActionPerformed
+        Mantenimiento_Huespedes frmMantHP = new Mantenimiento_Huespedes();
+        frmMantHP.setVisible(true);
+        JDPMDIContainer.add(frmMantHP);
+    }//GEN-LAST:event_HuespedesActionPerformed
+
+    private void PisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PisosActionPerformed
+        Mantenimiento_Pisos frmMantPisos = new Mantenimiento_Pisos();
+        frmMantPisos.setVisible(true);
+        JDPMDIContainer.add(frmMantPisos);
+    }//GEN-LAST:event_PisosActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         //CAMBIANDO LA INTERFAZ POR DEFECTO DE NETBEANS
-        try{
+        try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
 
