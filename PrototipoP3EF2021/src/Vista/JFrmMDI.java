@@ -36,13 +36,14 @@ public class JFrmMDI extends javax.swing.JFrame {
         JMenuItenCS = new javax.swing.JMenu();
         JMICS = new javax.swing.JMenuItem();
         JMenuCatalogos = new javax.swing.JMenu();
-        JMenuItemFacultades = new javax.swing.JMenuItem();
+        Amadellaves = new javax.swing.JMenuItem();
+        Habitaciones = new javax.swing.JMenuItem();
+        Servicios = new javax.swing.JMenuItem();
+        Formasdepago = new javax.swing.JMenuItem();
+        Huespedes = new javax.swing.JMenuItem();
+        Pisos = new javax.swing.JMenuItem();
         JMenuProcesos = new javax.swing.JMenu();
-        JMenuAsignaciones = new javax.swing.JMenu();
-        JMenuItemAsigCA = new javax.swing.JMenuItem();
-        JMenuItemAsigCC = new javax.swing.JMenuItem();
-        JMenuItemIN = new javax.swing.JMenuItem();
-        JMenuItemRegAct = new javax.swing.JMenuItem();
+        Facturarhabitacion = new javax.swing.JMenuItem();
         JMenuInformes = new javax.swing.JMenu();
         JMenuHerramientas = new javax.swing.JMenu();
         JMenuAyuda = new javax.swing.JMenu();
@@ -65,6 +66,7 @@ public class JFrmMDI extends javax.swing.JFrame {
         );
 
         JMenuItenCS.setText("Archivo");
+        JMenuItenCS.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         JMICS.setText("Cerrar Sesión");
         JMICS.addActionListener(new java.awt.event.ActionListener() {
@@ -77,44 +79,46 @@ public class JFrmMDI extends javax.swing.JFrame {
         JMenuBarMDI.add(JMenuItenCS);
 
         JMenuCatalogos.setText("Catálogos");
+        JMenuCatalogos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        JMenuItemFacultades.setText("Facultades");
-        JMenuItemFacultades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMenuItemFacultadesActionPerformed(evt);
-            }
-        });
-        JMenuCatalogos.add(JMenuItemFacultades);
+        Amadellaves.setText("Ama de Llaves");
+        JMenuCatalogos.add(Amadellaves);
+
+        Habitaciones.setText("Habitaciones");
+        JMenuCatalogos.add(Habitaciones);
+
+        Servicios.setText("Servicios");
+        JMenuCatalogos.add(Servicios);
+
+        Formasdepago.setText("Formas de Pago");
+        JMenuCatalogos.add(Formasdepago);
+
+        Huespedes.setText("Huespedes");
+        JMenuCatalogos.add(Huespedes);
+
+        Pisos.setText("Pisos");
+        JMenuCatalogos.add(Pisos);
 
         JMenuBarMDI.add(JMenuCatalogos);
 
         JMenuProcesos.setText("Procesos");
+        JMenuProcesos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        JMenuAsignaciones.setText("Asignaciones");
-
-        JMenuItemAsigCA.setText("Cursos a Alumnos");
-        JMenuAsignaciones.add(JMenuItemAsigCA);
-
-        JMenuItemAsigCC.setText("Cursos a Catedráticos");
-        JMenuAsignaciones.add(JMenuItemAsigCC);
-
-        JMenuProcesos.add(JMenuAsignaciones);
-
-        JMenuItemIN.setText("Ingreso Notas");
-        JMenuProcesos.add(JMenuItemIN);
-
-        JMenuItemRegAct.setText("Registo Actas");
-        JMenuProcesos.add(JMenuItemRegAct);
+        Facturarhabitacion.setText("Facturar Habitación");
+        JMenuProcesos.add(Facturarhabitacion);
 
         JMenuBarMDI.add(JMenuProcesos);
 
         JMenuInformes.setText("Informes");
+        JMenuInformes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JMenuBarMDI.add(JMenuInformes);
 
         JMenuHerramientas.setText("Herramientas");
+        JMenuHerramientas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JMenuBarMDI.add(JMenuHerramientas);
 
         JMenuAyuda.setText("Ayuda");
+        JMenuAyuda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         JMenuBarMDI.add(JMenuAyuda);
 
         setJMenuBar(JMenuBarMDI);
@@ -147,20 +151,6 @@ public class JFrmMDI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JMICSActionPerformed
 
-    private void JMenuItemFacultadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemFacultadesActionPerformed
-        /*JIntFrmMantFacultades jintfrm_mantfacultades = null;
-        try {
-            jintfrm_mantfacultades = new JIntFrmMantFacultades();
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrmMDI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Dimension main_window_size =  JDPMDIContainer.getSize();
-        Dimension second_window_size = jintfrm_mantfacultades.getSize();
-        jintfrm_mantfacultades.setLocation((main_window_size.width - second_window_size.width) / 2, (main_window_size.height - second_window_size.height) / 2);
-        jintfrm_mantfacultades.setVisible(true);
-        JDPMDIContainer.add(jintfrm_mantfacultades);*/
-    }//GEN-LAST:event_JMenuItemFacultadesActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -182,20 +172,21 @@ public class JFrmMDI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Amadellaves;
+    private javax.swing.JMenuItem Facturarhabitacion;
+    private javax.swing.JMenuItem Formasdepago;
+    private javax.swing.JMenuItem Habitaciones;
+    private javax.swing.JMenuItem Huespedes;
     private javax.swing.JDesktopPane JDPMDIContainer;
     private javax.swing.JMenuItem JMICS;
-    private javax.swing.JMenu JMenuAsignaciones;
     private javax.swing.JMenu JMenuAyuda;
     private javax.swing.JMenuBar JMenuBarMDI;
     private javax.swing.JMenu JMenuCatalogos;
     private javax.swing.JMenu JMenuHerramientas;
     private javax.swing.JMenu JMenuInformes;
-    private javax.swing.JMenuItem JMenuItemAsigCA;
-    private javax.swing.JMenuItem JMenuItemAsigCC;
-    private javax.swing.JMenuItem JMenuItemFacultades;
-    private javax.swing.JMenuItem JMenuItemIN;
-    private javax.swing.JMenuItem JMenuItemRegAct;
     private javax.swing.JMenu JMenuItenCS;
     private javax.swing.JMenu JMenuProcesos;
+    private javax.swing.JMenuItem Pisos;
+    private javax.swing.JMenuItem Servicios;
     // End of variables declaration//GEN-END:variables
 }
