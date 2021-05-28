@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author gegmo
+ * @author Diego
  */
 public class HabitacionesDAO {
 

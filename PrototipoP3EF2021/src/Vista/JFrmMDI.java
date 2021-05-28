@@ -11,7 +11,7 @@ import javax.swing.UIManager;
 
 /**
  *
- * @author Diego Vásquez
+ * @author Diego
  */
 public class JFrmMDI extends javax.swing.JFrame {
 

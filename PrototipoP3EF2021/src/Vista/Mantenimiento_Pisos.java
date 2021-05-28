@@ -27,7 +27,7 @@ import net.sf.jasperreports.view.JasperViewer;*/
 
 /**
  *
- * @author Jeff
+ * @author Diego
  */
 public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
 
@@ -526,7 +526,7 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
 
         try {
-            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaMantenimientoPisos.chm")).exists()) {
+            if ((new File("src\\main\\java\\Ayudas\\AyudaMantenimientoPisos.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
                         .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaMantenimientoPisos.chm");

@@ -25,7 +25,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;*/
 /**
  *
- * @author leelu
+ * @author Diego
  */
 public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
 
@@ -524,7 +524,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaMantenimientoHuespedes.chm")).exists()) {
+            if ((new File("src\\main\\java\\Ayudas\\AyudaMantenimientoHuespedes.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
                         .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaMantenimientoHuespedes.chm");

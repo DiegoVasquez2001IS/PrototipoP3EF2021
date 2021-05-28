@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author visitante
+ * @author Diego
  */
 public class PisosDAO {
 

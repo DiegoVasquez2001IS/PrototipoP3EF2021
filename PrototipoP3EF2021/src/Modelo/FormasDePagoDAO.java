@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author leone
+ * @author Diego
  */
 public class FormasDePagoDAO {
     private static final String SQL_INSERT = "insert into tbl_metodos_de_pago values(?,?,?,?)";

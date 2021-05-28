@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Jeff
+ * @author Diego
  */
 public class FacturacionDAO {
 

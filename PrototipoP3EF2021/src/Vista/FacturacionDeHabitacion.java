@@ -27,7 +27,7 @@ import net.sf.jasperreports.view.JasperViewer;*/
 
 /**
  *
- * @author Jeff
+ * @author Diego
  */
 public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
 
